@@ -1,0 +1,102 @@
+# praktikum9
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Picker Hewan</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        #pilihGambar {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #imageArea {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #imageArea img {
+            max-width: 100%;
+            width: 400px;
+            height: 250px;
+            margin-bottom: 10px;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            display: none;
+            object-fit: cover;
+        }
+
+        #caption {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+            min-height: 25px;
+        }
+
+        /* Supaya gambar muncul kalau src tidak kosong */
+        #imgTampil[src]:not([src=""]) {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Image Picker Hewan</h2>
+
+    <select id="pilihGambar" onchange="tampilkanGambar()">
+        <option value="">-- Pilih Gambar --</option>
+        <option value="images/bison.jpg">Bison</option>
+        <option value="images/gorila.jpg">Gorilla</option>
+        <option value="images/kucing.png">Kucing</option>
+        <option value="images/elang.jpg">Elang</option>
+        <option value="images/panda.jpg">Panda</option>
+        <option value="images/singa.jpg">Singa</option>
+    </select>
+
+    <div id="imageArea">
+        <img id="imgTampil" src="" alt="">
+        <p id="caption"></p>
+    </div>
+
+    <script>
+        function tampilkanGambar() {
+            const select = document.getElementById("pilihGambar");
+            const file = select.value;
+            const selectedText = select.options[select.selectedIndex].text;
+            const img = document.getElementById("imgTampil");
+            const caption = document.getElementById("caption");
+
+            if (file === "") {
+                img.src = "";
+                caption.textContent = "";
+                return;
+            }
+
+            img.src = file;
+            img.alt = "Gambar " + selectedText;
+            caption.textContent = selectedText;
+
+            alert("Gambar yang dipilih: " + selectedText);
+        }
+    </script>
+
+</body>
+</html>
