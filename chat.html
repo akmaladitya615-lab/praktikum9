@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbox Sederhana</title>
+
+    <style>
+        /* Kotak chat */
+        #chatbox {
+            width: 300px;
+            height: 350px;
+            border: 1px solid black;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Area pesan */
+        #pesanArea {
+            flex: 1;
+            padding: 5px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #999;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        /* Input bawah */
+        #inputArea {
+            display: flex;
+        }
+
+        #inputText {
+            flex: 1;
+            padding: 5px;
+            border: none;
+            outline: none;
+        }
+
+        #btnKirim {
+            width: 60px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- CHATBOX -->
+    <div id="chatbox">
+        <div id="pesanArea"></div>
+
+        <div id="inputArea">
+            <input type="text" id="inputText" placeholder="Tulis pesan...">
+            <button id="btnKirim">Kirim</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Fungsi kirim pesan
+        function kirimPesan() {
+            let input = document.getElementById("inputText");
+            let area = document.getElementById("pesanArea");
+
+            if (input.value.trim() === "") return;
+
+            area.innerHTML += "<div>" + input.value + "</div>";
+            input.value = "";
+            area.scrollTop = area.scrollHeight; // Auto scroll ke bawah
+        }
+
+        // Tombol diklik
+        document.getElementById("btnKirim").addEventListener("click", kirimPesan);
+
+        // Tekan ENTER
+        document.getElementById("inputText").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") kirimPesan();
+        });
+    </script>
+
+</body>
+</html>
